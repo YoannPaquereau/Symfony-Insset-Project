@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ form_start(formLogin) }}
+        {{ form_row(formLogin.username) }}
+        {{ form_row(formLogin.password) }}
+        {{ form_row(formLogin.submitLogin) }}
+    {{ form_end(formLogin) }}
+{% endblock %}
