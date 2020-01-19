@@ -7,13 +7,20 @@ namespace App\Controller\accountManager;
 use App\Entity\User;
 use App\Form\LoginType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 
 class LoginController extends AbstractController
 {
+    private $session;
+
+    public function __construct(SessionInterface $session) {
+        $this->session = $session;
+    }
 
     /**
      * @Route("/login", name="loginForm")
@@ -35,13 +42,33 @@ class LoginController extends AbstractController
             $userFind = $repository->findOneBy(['username' => $user->getUsername()]);
 
             if (password_verify($user->getPassword(), $userFind->getPassword())) {
-                return new Response("Connexion réussie !");
+                $this->session->set('user', serialize($user));
+                return $this->redirectToRoute('homepage');
             }
         }
 
         return $this->render('accountManager/login.html.twig', [
             'formLogin' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/logout", name="logout")
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function logout(Request $request) {
+        $this->session->clear();
+        return $this->redirectToRoute('homepage');
+    }
+
+
+    public function menu() {
+        $twigVar = [];
+        if ($this->session->has('user'))
+            $twigVar['user'] = unserialize($this->session->get('user'));
+
+        return $this->render('menu/menu.html.twig', $twigVar);
     }
 
 }
