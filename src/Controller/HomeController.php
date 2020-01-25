@@ -19,4 +19,8 @@ class HomeController extends AbstractController
     public function home(Request $request) {
         return $this->render('homepage.html.twig');
     }
+
+    public function menu() {
+        return $this->render('menu/menu.html.twig');
+    }
 }
