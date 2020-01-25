@@ -2,12 +2,37 @@
 
 {% block title %}Inscription{% endblock %}
 
+
+{% block stylesheets %}
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css' rel='stylesheet' type='text/css'>
+    <style>
+        form {
+            width: 20%;
+            margin: auto;
+            top: 50%;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
     {{ form_start(formRegister) }}
         {{ form_row(formRegister.username) }}
         {{ form_row(formRegister.password) }}
         {{ form_row(formRegister.email) }}
         {{ form_row(formRegister.birthday) }}
-        {{ form_row(formRegister.submitRegister) }}
+        {{ form_row(formRegister.submitRegister, {'attr': {'class': 'btn btn-primary btn-lg btn-block'}}) }}
     {{ form_end(formRegister) }}
+{% endblock %}
+
+{% block javascripts %}
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js' type='text/javascript'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.fr.min.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(function() {
+            $('.js-datepicker').datepicker({
+                language: 'fr'
+            });
+        });
+    </script>
 {% endblock %}

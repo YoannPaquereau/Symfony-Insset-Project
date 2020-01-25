@@ -34,9 +34,15 @@ class RegisterType extends AbstractType
             ])
 
             ->add('birthday', BirthdayType::class, [
+                'widget' => 'single_text',
+                'html5' => false,
                 'label' => 'Date de naissance',
                 'format'=> 'dd/MM/yyyy',
+                'invalid_message' => 'Date incorrecte',
+                'attr' => ['class' => 'js-datepicker'],
             ])
+
+            #// TODO : Gérer les dates valides avec JS (ex: 30/02)
 
             ->add('submitRegister', SubmitType::class, [
                 'label' => 'Envoyer',
