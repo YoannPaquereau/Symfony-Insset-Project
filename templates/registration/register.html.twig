@@ -15,13 +15,13 @@
 {% endblock %}
 
 {% block body %}
-    {{ form_start(formRegister) }}
-        {{ form_row(formRegister.username) }}
-        {{ form_row(formRegister.password) }}
-        {{ form_row(formRegister.email) }}
-        {{ form_row(formRegister.birthday) }}
-        {{ form_row(formRegister.submitRegister, {'attr': {'class': 'btn btn-primary btn-lg btn-block'}}) }}
-    {{ form_end(formRegister) }}
+    {{ form_start(registrationForm) }}
+    {{ form_row(registrationForm.username) }}
+    {{ form_row(registrationForm.password) }}
+    {{ form_row(registrationForm.email) }}
+    {{ form_row(registrationForm.birthday) }}
+    {{ form_row(registrationForm.submitRegister, {'attr': {'class': 'btn btn-primary btn-lg btn-block'}}) }}
+    {{ form_end(registrationForm) }}
 {% endblock %}
 
 {% block javascripts %}
