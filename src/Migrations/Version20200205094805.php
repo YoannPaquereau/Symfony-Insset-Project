@@ -31,6 +31,7 @@ final class Version20200205094805 extends AbstractMigration
         $this->addSql('ALTER TABLE order_detail ADD CONSTRAINT FK_ED896F46DD4481AD FOREIGN KEY (id_order_id) REFERENCES `order` (id)');
         $this->addSql('ALTER TABLE `order` ADD CONSTRAINT FK_F529939879F37AE5 FOREIGN KEY (id_user_id) REFERENCES user (id)');
         $this->addSql('ALTER TABLE image ADD CONSTRAINT FK_C53D045FE00EE68D FOREIGN KEY (id_product_id) REFERENCES product (id)');
+        $this->addSql('INSERT INTO user (id, username, roles, password, email, birthday, register_day) VALUES (1, "admin", "[\"ROLE_ADMIN\"]", "$argon2id$v=19$m=65536,t=4,p=1$S4ooPgi084v30hLApPyCfA$qTMYwEtjdwrbxPXWKxE+qBLJu8RbBcRhftbMXxv2DhI", "admin@gmail.com", "1998-03-24", "2020-02-05 09:52:31")');
     }
 
     public function down(Schema $schema) : void
