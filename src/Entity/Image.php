@@ -27,7 +27,7 @@ class Image
     private $path;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\product", inversedBy="images")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="images")
      * @ORM\JoinColumn(nullable=false)
      */
     private $id_product;

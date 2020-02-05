@@ -17,7 +17,7 @@ class OrderDetail
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\product")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Product")
      * @ORM\JoinColumn(nullable=false)
      */
     private $id_product;
@@ -28,7 +28,7 @@ class OrderDetail
     private $quantity;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\order", inversedBy="orderDetails")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Order", inversedBy="orderDetails")
      * @ORM\JoinColumn(nullable=false)
      */
     private $id_order;
