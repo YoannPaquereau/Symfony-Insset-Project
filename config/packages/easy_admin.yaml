@@ -2,6 +2,14 @@ easy_admin:
     entities:
         Produits:
             class: App\Entity\Product
+            list:
+                fields:
+                    - { property: 'id', label: 'ID' }
+                    - { property: 'name', label: 'Nom' }
+                    - { property: 'price', label: 'Prix' }
+                    - { property: 'stock', label: 'Stock' }
+                    - { property: 'imagePath', type: 'image', base_path: '%app.path.product_images%', label: 'image' }
+                    - { property: 'available', label: 'Dispo.' }
             new:
                 fields:
                     - { property: 'name', label: 'Nom' }
@@ -9,7 +17,7 @@ easy_admin:
                     - { property: 'price', label: 'Prix', type: 'money', type_option: { currency: 'EUR' } }
                     - { property: 'stock', label: 'Stock', type: 'number' }
                     - { property: 'available', label: 'Disponible sur le catalogue' }
-
+                    - { property: 'imageFile', label: 'Image', type: 'vich_image' }
 
 #        - App\Entity\Category
 #        - App\Entity\User
