@@ -1,0 +1,15 @@
+easy_admin:
+    entities:
+        Produits:
+            class: App\Entity\Product
+            new:
+                fields:
+                    - { property: 'name', label: 'Nom' }
+                    - { property: 'description', label: 'Description' }
+                    - { property: 'price', label: 'Prix', type: 'money', type_option: { currency: 'EUR' } }
+                    - { property: 'stock', label: 'Stock', type: 'number' }
+                    - { property: 'available', label: 'Disponible sur le catalogue' }
+
+
+#        - App\Entity\Category
+#        - App\Entity\User
