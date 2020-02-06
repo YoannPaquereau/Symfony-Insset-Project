@@ -2,12 +2,13 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
+ * @Vich\Uploadable
  */
 class Product
 {
@@ -47,6 +48,12 @@ class Product
      * @ORM\Column(type="string", length=255)
      */
     private $imagePath;
+
+    /**
+     * @Vich\UploadableField(mapping="product_images", fileNameProperty="imagePath")
+     * @var File
+     */
+    private $imageFile;
 
 
     public function getId(): ?int
@@ -114,16 +121,24 @@ class Product
         return $this;
     }
 
-    public function getImagePath(): ?string
+    public function setImageFile(File $image = null)
+    {
+        $this->imageFile = $image;
+    }
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    public function getImagePath()
     {
         return $this->imagePath;
     }
 
-    public function setImagePath(string $imagePath): self
+    public function setImagePath($image)
     {
-        $this->imagePath = $imagePath;
-
-        return $this;
+        $this->imagePath = $image;
     }
 
 }
