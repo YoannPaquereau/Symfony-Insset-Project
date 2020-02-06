@@ -44,14 +44,10 @@ class Product
     private $available;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="id_product", orphanRemoval=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $images;
+    private $imagePath;
 
-    public function __construct()
-    {
-        $this->images = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -118,34 +114,16 @@ class Product
         return $this;
     }
 
-    /**
-     * @return Collection|Image[]
-     */
-    public function getImages(): Collection
+    public function getImagePath(): ?string
     {
-        return $this->images;
+        return $this->imagePath;
     }
 
-    public function addImage(Image $image): self
+    public function setImagePath(string $imagePath): self
     {
-        if (!$this->images->contains($image)) {
-            $this->images[] = $image;
-            $image->setIdProduct($this);
-        }
+        $this->imagePath = $imagePath;
 
         return $this;
     }
 
-    public function removeImage(Image $image): self
-    {
-        if ($this->images->contains($image)) {
-            $this->images->removeElement($image);
-            // set the owning side to null (unless already changed)
-            if ($image->getIdProduct() === $this) {
-                $image->setIdProduct(null);
-            }
-        }
-
-        return $this;
-    }
 }
