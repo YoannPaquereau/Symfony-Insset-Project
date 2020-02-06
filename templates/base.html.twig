@@ -20,7 +20,7 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                {{ render(controller('App\\Controller\\HomeController::menu')) }}
+                    {% include('menu/menu.html.twig') %}
                 </ul>
             </div>
         </nav>
