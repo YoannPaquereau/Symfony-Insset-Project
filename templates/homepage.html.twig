@@ -1,9 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block title %}Accueil{% endblock %}
 {% block body %}
-<div class="container-fluid">
-    <div class="row d-inline-flex">
-        {{ render(controller('App\\Controller\\HomeController::getProduct')) }}
-    </div>
+<div class="container mt-4">
+    {{ render(controller('App\\Controller\\HomeController::getProduct')) }}
 </div>
 {% endblock %}

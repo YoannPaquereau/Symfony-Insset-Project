@@ -1,14 +1,20 @@
-{% for  product in products %}
-    <div class="col-6 col-sm-6 col-md-3 p-2">
-        <div class="card h-100">
-            <img class="card-img-top img-fluid" src="{{ url }}/{{ product.imagePath }}" alt="Card image cap">
-            <div class="card-body d-flex flex-column">
-                <h5 class="card-title">{{ product.name}}</h5>
-                <p class="card-text">{{ product.description }}</p>
-                <button type="button" class="btn btn-secondary btn-lg btn-block mt-auto">
-                    Ajouter au panier
-                </button>
+<div class="row">
+    {% for  product in products %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img class="card-img-top img-fluid" src="{{ url }}/{{ product.imagePath }}" alt="Card image cap">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{ product.name}}</h5>
+                    <p class="card-text">{{ product.description }}</p>
+                    <div class="text-primary" style="font-size: 2rem; font-weight: bold;">{{ product.price }} €</div>
+                    <button type="button" class="btn btn-secondary btn-lg btn-block mt-auto">
+                        Ajouter au panier
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
-{% endfor %}
+    {% endfor %}
+</div>
+<div class="pagination">
+    {{ knp_pagination_render(products) }}
+</div>
