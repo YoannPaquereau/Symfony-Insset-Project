@@ -20,13 +20,13 @@ class HomeController extends AbstractController
      * @return Response
      */
     public function home(PaginatorInterface $paginator, Request $request) {
-        $product = $this->getDoctrine()
-            ->getRepository(Product::class)
-        ;
+        $em = $this->getDoctrine()->getManager();
+
+        $dql = "SELECT p FROM App\Entity\Product p";
+        $query = $em->createQuery($dql);
+
         $pagination = $paginator->paginate(
-            $product->findBy([
-                'available' => 1
-            ]),
+            $query,
             $request->query->getInt('page', 1),
             9
         );
