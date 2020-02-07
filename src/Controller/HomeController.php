@@ -15,14 +15,11 @@ class HomeController extends AbstractController
 {
     /**
      * @Route("/", name="homepage")
+     * @param PaginatorInterface $paginator
      * @param Request $request
      * @return Response
      */
-    public function home(Request $request) {
-        return $this->render('homepage.html.twig');
-    }
-
-    public function getProduct(PaginatorInterface $paginator, Request $request) {
+    public function home(PaginatorInterface $paginator, Request $request) {
         $product = $this->getDoctrine()
             ->getRepository(Product::class)
         ;
@@ -34,8 +31,7 @@ class HomeController extends AbstractController
             9
         );
 
-
-        return $this->render('products/product.html.twig', [
+        return $this->render('homepage.html.twig', [
             'products' => $pagination,
             'url' => $this->getParameter('app.path.product_images')
         ]);

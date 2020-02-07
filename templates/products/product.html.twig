@@ -1,5 +1,5 @@
 <div class="row">
-    {% for  product in products %}
+    {% for product in products %}
         <div class="col-md-4">
             <div class="card mb-4">
                 <img class="card-img-top img-fluid" src="{{ url }}/{{ product.imagePath }}" alt="Card image cap">
@@ -17,4 +17,7 @@
 </div>
 <div class="pagination">
     {{ knp_pagination_render(products) }}
+</div>
+<div class="count">
+    {{ products.getTotalItemCount }}
 </div>
