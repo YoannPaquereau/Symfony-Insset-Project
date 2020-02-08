@@ -28,7 +28,7 @@ class HomeController extends AbstractController
         $pagination = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
-            9
+            12
         );
 
         return $this->render('homepage.html.twig', [
