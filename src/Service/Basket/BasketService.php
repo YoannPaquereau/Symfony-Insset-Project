@@ -66,4 +66,13 @@ class BasketService
 
         $this->session->set('basket', $basket);
     }
+
+    public function editQuantity($id, $quantity) {
+        $basket = $this->session->get('basket', []);
+        if (!empty($basket[$id])) {
+            $basket[$id] = $quantity;
+        }
+
+        $this->session->set('basket', $basket);
+    }
 }

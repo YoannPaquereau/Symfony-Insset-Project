@@ -19,7 +19,20 @@
                         <td>{{ item.product.name }}</td>
                         <td><img class="card-img-top img-fluid" src="{{ url }}/{{ item.product.imagePath }}" style="width:50px;height:50px;" alt=""></td>
                         <td>{{ item.product.price }}€</td>
-                        <td>{{ item.quantity }}</td>
+                        <td>
+                            <form action="{{ path('edit_quantity', {'id': item.product.id }) }}" method="post">
+                                <select name="quantity">
+                                    {% for i in 1..item.product.stock %}
+                                        {% if i == item.quantity %}
+                                            <option value="" disabled selected>{{ item.quantity }}</option>
+                                        {% else %}
+                                            <option value="{{ i }}">{{ i }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                                <button><i class="far fa-edit"></i></button>
+                            </form>
+                        </td>
                         <td>{{ item.product.price * item.quantity }}€</td>
                         <td>
                             <a href="{{ path('removeBasket', {'id': item.product.id }) }}" class="btn btn-danger btn-sm">
