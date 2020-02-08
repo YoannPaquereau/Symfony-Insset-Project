@@ -18,10 +18,9 @@
                     <h5 class="card-title">{{ product.name}}</h5>
                     <p class="card-text">{{ product.description }}</p>
                     <div class="text-primary" style="font-size: 2rem; font-weight: bold;">{{ product.price }} €</div>
-                    <button type="button" class="btn btn-secondary btn-lg btn-block mt-auto" {% if product.available == 0 %}disabled{% endif %}>
-                        {% if product.available == 0 %}Non disponible
-                        {% else %}Ajouter au panier{% endif %}
-                    </button>
+                    <a href="{{ path('addBasket', {'id': product.id}) }}" class="btn btn-success float-right">
+                        Ajouter
+                    </a>
                 </div>
             </div>
         </div>
