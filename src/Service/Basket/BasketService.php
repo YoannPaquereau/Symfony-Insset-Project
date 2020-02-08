@@ -56,4 +56,14 @@ class BasketService
 
         return $total;
     }
+
+    public function remove(int $id) {
+        $basket = $this->session->get('basket', []);
+
+        if (!empty($basket[$id])) {
+            unset($basket[$id]);
+        }
+
+        $this->session->set('basket', $basket);
+    }
 }

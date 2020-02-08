@@ -42,4 +42,15 @@ class ShoppingController extends AbstractController
         $basketService->add($id);
         return $this->redirectToRoute("basket_index");
     }
+
+    /**
+     * @Route("/remove/{id}", name="removeBasket")
+     * @param $id
+     * @param BasketService $basketService
+     * @return RedirectResponse
+     */
+    public function removeProduct($id, BasketService $basketService) {
+        $basketService->remove($id);
+        return $this->redirectToRoute("basket_index");
+    }
 }

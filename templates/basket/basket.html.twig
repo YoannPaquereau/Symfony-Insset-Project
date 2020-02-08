@@ -22,8 +22,8 @@
                         <td>{{ item.quantity }}</td>
                         <td>{{ item.product.price * item.quantity }}€</td>
                         <td>
-                            <a href="#" class="btn btn-danger btn-sm">
-                                <i class="fas fa-trash"></i>
+                            <a href="{{ path('removeBasket', {'id': item.product.id }) }}" class="btn btn-danger btn-sm">
+                            <i class="fas fa-trash"></i>
                             </a>
                         </td>
                     </tr>
