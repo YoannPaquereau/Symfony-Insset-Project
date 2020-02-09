@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ORM\Table(name="orders")
  * @ORM\Entity(repositoryClass="App\Repository\OrderRepository")
  */
 class Order
@@ -47,6 +48,8 @@ class Order
     public function __construct()
     {
         $this->orderDetails = new ArrayCollection();
+        $this->setDate(new \DateTime());
+        $this->setShippingStatus(false);
     }
 
     public function getId(): ?int

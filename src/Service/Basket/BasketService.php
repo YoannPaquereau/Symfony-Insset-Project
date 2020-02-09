@@ -75,4 +75,14 @@ class BasketService
 
         $this->session->set('basket', $basket);
     }
+
+    public function isEmpty() {
+        $basket = $this->session->get("basket");
+        if ($basket !== null) {
+            if (!empty($basket)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

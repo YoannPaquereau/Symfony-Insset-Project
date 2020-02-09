@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+{% block title %}Mon panier{% endblock %}
 
 {% block body %}
     {% if products | length > 0 %}
@@ -50,6 +51,12 @@
                 <td></td></tr>
             </tfoot>
         </table>
+        <div class="w-25 m-auto">
+            <a href="{{ path('order_create') }}" class="btn btn-outline-success btn-block" role="button" aria-disabled="true">
+                <i class="fas fa-shopping-cart"> Confirmer la commande</i>
+            </a>
+        </div>
     {% else %}
+        <h3>Panier vide</h3>
     {% endif %}
 {% endblock %}
