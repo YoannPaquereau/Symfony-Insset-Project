@@ -18,9 +18,12 @@
     <h1 class="h3 mb-3 font-weight-normal">Inscription</h1>
     {{ form_row(registrationForm.username) }}
     {{ form_row(registrationForm.password) }}
+    {{ form_row(registrationForm.firstName) }}
+    {{ form_row(registrationForm.lastName) }}
     {{ form_row(registrationForm.email) }}
     {{ form_row(registrationForm.birthday) }}
     {{ form_row(registrationForm.submitRegister, {'attr': {'class': 'btn btn-primary btn-lg btn-block'}}) }}
+    <p>Déjà un compte ? <a href="{{ path('app_login') }}">Cliquez ici</a></p>
     {{ form_end(registrationForm) }}
 {% endblock %}
 

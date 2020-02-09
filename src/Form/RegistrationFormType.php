@@ -23,20 +23,28 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('username', TextType::class, [
-                'label' => 'Nom d\'utilisateur'
+                'label' => 'Nom d\'utilisateur',
+                'required' => true
             ])
-
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'first_options' => ['label' => 'Mot de passe'],
                 'second_options' => ['label' => 'Répéter le mot de passe'],
                 'invalid_message' => 'Les 2 mots de passe doivent être identiques',
+                'required' => true
             ])
-
             ->add('email', EmailType::class, [
                 'label' => 'Adresse mail',
+                'required' => true
             ])
-
+            ->add('lastName',  TextType::class, [
+                'label' => 'Nom',
+                'required' => true
+            ])
+            ->add('firstName',  TextType::class, [
+                'label' => 'Prénom',
+                'required' => true
+            ])
             ->add('birthday', BirthdayType::class, [
                 'widget' => 'single_text',
                 'html5' => false,
@@ -44,10 +52,8 @@ class RegistrationFormType extends AbstractType
                 'format'=> 'dd/MM/yyyy',
                 'invalid_message' => 'Date incorrecte',
                 'attr' => ['class' => 'js-datepicker'],
+                'required' => true
             ])
-
-            #// TODO : Gérer les dates valides avec JS (ex: 30/02)
-
             ->add('submitRegister', SubmitType::class, [
                 'label' => 'Envoyer',
             ])
