@@ -75,4 +75,30 @@ class BasketService
 
         $this->session->set('basket', $basket);
     }
+
+    public function isEmpty() {
+        $basket = $this->session->get("basket");
+        if ($basket !== null) {
+            if (!empty($basket)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function empty() {
+        $this->session->remove('basket');
+    }
+
+    public function setConfirmOrder() {
+        $this->session->set('confirmOrder', true);
+    }
+
+    public function getConfirmOrder() {
+        if ($this->session->has('confirmOrder')) {
+            $this->session->remove('confirmOrder');
+            return true;
+        }
+        return false;
+    }
 }

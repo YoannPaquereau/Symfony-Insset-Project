@@ -40,4 +40,5 @@ security:
         # - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         # - { path: ^/, roles: IS_AUTHENTICATED_REMEMBERED }
         - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/order, roles: ROLE_USER }
         # - { path: ^/profile, roles: ROLE_USER }

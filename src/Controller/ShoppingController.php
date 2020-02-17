@@ -23,13 +23,15 @@ class ShoppingController extends AbstractController
     /**
      * @Route("/", name="basket_index")
      * @param BasketService $basketService
+     * @param Request $request
      * @return Response
      */
-    public function index(BasketService $basketService) {
+    public function index(BasketService $basketService, Request $request) {
         return $this->render('basket/basket.html.twig', [
             'products'=> $basketService->getBasket(),
             'url' => $this->getParameter('app.path.product_images'),
-            'total' => $basketService->getTotal()
+            'total' => $basketService->getTotal(),
+            'last_page' => $request->headers->get('referer')
         ]);
     }
 
