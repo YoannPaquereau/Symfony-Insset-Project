@@ -2,6 +2,7 @@
 {% block title %}Mon panier{% endblock %}
 
 {% block body %}
+    <a href="{{ last_page }}" class="btn btn-outline-primary " role="button" aria-pressed="true">Revenir en arrière</a>
     {% if products | length > 0 %}
         <table class="table">
             <thead>
