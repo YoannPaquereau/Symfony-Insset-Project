@@ -89,4 +89,16 @@ class BasketService
     public function empty() {
         $this->session->remove('basket');
     }
+
+    public function setConfirmOrder() {
+        $this->session->set('confirmOrder', true);
+    }
+
+    public function getConfirmOrder() {
+        if ($this->session->has('confirmOrder')) {
+            $this->session->remove('confirmOrder');
+            return true;
+        }
+        return false;
+    }
 }

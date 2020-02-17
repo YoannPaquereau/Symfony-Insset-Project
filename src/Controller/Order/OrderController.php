@@ -29,6 +29,6 @@ class OrderController extends AbstractController
         }
 
         $orderService->createOrder($this->getUser());
-        return $this->redirectToRoute("homepage");
+        return $this->redirectToRoute("homepage", array('confirmOrder' => true), 307);
     }
 }

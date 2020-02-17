@@ -1,6 +1,11 @@
 {% extends 'base.html.twig' %}
 {% block title %}Accueil{% endblock %}
 {% block body %}
+    {% if orderConfirm == true %}
+        <div class="alert alert-success" role="alert">
+            Votre commande a bien été confirmée ! Vous receverez un mail lors de son expédition.
+        </div>
+    {% endif %}
 <div class="container mt-4">
     {% include('products/product.html.twig') %}
 </div>

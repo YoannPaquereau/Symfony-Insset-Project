@@ -51,5 +51,6 @@ class OrderService
 
         $this->em->flush();
         $this->basketService->empty();
+        $this->basketService->setConfirmOrder();
     }
 }

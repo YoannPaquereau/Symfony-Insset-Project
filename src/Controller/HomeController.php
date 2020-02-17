@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 use App\Entity\Product;
+use App\Service\Basket\BasketService;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,9 +18,11 @@ class HomeController extends AbstractController
      * @Route("/", name="homepage")
      * @param PaginatorInterface $paginator
      * @param Request $request
+     * @param BasketService $basketService
      * @return Response
      */
-    public function home(PaginatorInterface $paginator, Request $request) {
+    public function home(PaginatorInterface $paginator, Request $request, BasketService $basketService)  {
+        $confirmOrder = ($basketService->getConfirmOrder()) ? true : false;
         $em = $this->getDoctrine()->getManager();
 
         $dql = "SELECT p FROM App\Entity\Product p";
@@ -33,7 +36,8 @@ class HomeController extends AbstractController
 
         return $this->render('homepage.html.twig', [
             'products' => $pagination,
-            'url' => $this->getParameter('app.path.product_images')
+            'url' => $this->getParameter('app.path.product_images'),
+            'orderConfirm' => $confirmOrder
         ]);
     }
 }
