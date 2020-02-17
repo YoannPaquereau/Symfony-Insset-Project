@@ -5,6 +5,7 @@ namespace App\Service\Order;
 
 use App\Entity\Order;
 use App\Entity\OrderDetail;
+use App\Entity\Product;
 use App\Entity\User;
 use App\Service\Basket\BasketService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -42,8 +43,13 @@ class OrderService
             $orderDetail->setIdOrder($order);
 
             $this->em->persist($orderDetail);
+
+            $product = $this->em->getRepository(Product::class)->find($item['product']->getId());
+            $product->setStock($product->getStock() - $item['quantity']);
+            $this->em->flush();
         }
 
         $this->em->flush();
+        $this->basketService->empty();
     }
 }

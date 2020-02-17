@@ -85,4 +85,8 @@ class BasketService
         }
         return false;
     }
+
+    public function empty() {
+        $this->session->remove('basket');
+    }
 }
