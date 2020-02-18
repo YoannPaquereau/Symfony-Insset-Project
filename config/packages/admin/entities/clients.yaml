@@ -1,0 +1,18 @@
+easy_admin:
+  entities:
+    Clients:
+      label: Clients
+      class: App\Entity\User
+      disabled_actions: ['new', 'edit']
+      list:
+        actions: ['show']
+        fields: &clientFields
+          - { property: 'id', label: 'ID' }
+          - { property: 'username', label: 'Nom' }
+          - { property: 'email', label: 'Email' }
+          - { property: 'birthday', label: 'Anniversaire' }
+          - { property: 'register_day', label: "Date d'inscription" }
+          - { property: 'last_name', label: 'Nom' }
+          - { property: 'first_name', label: 'Prénom' }
+      show:
+        fields: *clientFields

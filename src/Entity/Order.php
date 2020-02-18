@@ -45,6 +45,11 @@ class Order
      */
     private $orderDetails;
 
+    public function __toString()
+    {
+        return strval($this->getId());
+    }
+
     public function __construct()
     {
         $this->orderDetails = new ArrayCollection();

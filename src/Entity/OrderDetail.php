@@ -34,6 +34,11 @@ class OrderDetail
      */
     private $id_order;
 
+    public function __toString()
+    {
+        return strval($this->getIdProduct());
+    }
+
     public function getId(): ?int
     {
         return $this->id;

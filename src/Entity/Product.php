@@ -55,6 +55,11 @@ class Product
      */
     private $imageFile;
 
+    public function __toString()
+    {
+        return strval($this->getId()).' - '.$this->getName();
+    }
+
 
     public function getId(): ?int
     {

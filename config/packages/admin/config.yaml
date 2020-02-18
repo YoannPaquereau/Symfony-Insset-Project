@@ -1,0 +1,4 @@
+easy_admin:
+  formats:
+    datetime: 'd/m/Y H:i e'
+    date: 'd/m/Y'

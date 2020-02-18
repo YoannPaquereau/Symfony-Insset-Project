@@ -24,7 +24,7 @@
                     <h5 class="card-title">{{ product.name}}</h5>
                     <p class="card-text">{{ product.description }}</p>
                     <div class="text-primary" style="font-size: 2rem; font-weight: bold;">{{ product.price }} €</div>
-                    {% if product.available == 1 %}
+                    {% if product.stock > 0 %}
                         <a href="{{ path('addBasket', {'id': product.id}) }}" class="btn btn-outline-success float-right" role="button">
                             <i class="fas fa-cart-arrow-down"></i>
                         </a>
