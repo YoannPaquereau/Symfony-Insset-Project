@@ -1,0 +1,7 @@
+easy_admin:
+  design:
+    menu:
+      - Clients
+      - label: 'Commandes'
+        children: ['OrdersNotShipped', 'OrdersShipped', 'Orders']
+      - Products

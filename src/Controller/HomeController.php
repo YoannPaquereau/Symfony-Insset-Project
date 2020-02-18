@@ -25,7 +25,7 @@ class HomeController extends AbstractController
         $confirmOrder = ($basketService->getConfirmOrder()) ? true : false;
         $em = $this->getDoctrine()->getManager();
 
-        $dql = "SELECT p FROM App\Entity\Product p";
+        $dql = "SELECT p FROM App\Entity\Product p WHERE p.available = 1";
         $query = $em->createQuery($dql);
 
         $pagination = $paginator->paginate(

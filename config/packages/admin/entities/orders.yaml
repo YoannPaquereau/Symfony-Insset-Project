@@ -1,0 +1,68 @@
+easy_admin:
+  entities:
+    Orders:
+      label: Toutes
+      class: App\Entity\Order
+      disabled_actions: ['new', 'edit']
+      list:
+        actions: ['show']
+        fields: &orderListFields
+          - { property: 'id', label: 'ID' }
+          - { property: 'id_user', label: 'Client' }
+          - { property: 'date', label: 'Date' }
+          - { property: 'price', label: 'Montant' }
+          - { property: 'shipping_status', label: "Expédiée ?" }
+      show:
+        fields: &orderShowFields
+          - { property: 'id', label: 'ID' }
+          - { property: 'id_user', label: 'Client'}
+          - { property: 'date', label: 'Date' }
+          - { property: 'price', label: 'Montant', type_options: { currency: 'EUR' } }
+          - { property: 'shipping_status', label: "Expédiée ?" }
+          - { property: 'orderDetails', label: 'Produits', type_options: { class: 'App\Entity\OrderDetail' } }
+      form:
+        fields: &orderFormFields
+          - { property: 'id', label: 'ID', type_options: { disabled: true } }
+          - { property: 'id_user', label: 'Client', type_options: { disabled: true } }
+          - { property: 'date', label: 'Date', type_options: { disabled: true } }
+          - { property: 'price', label: 'Montant', type: 'money', type_options: { disabled: true, currency: 'EUR' } }
+          - { property: 'shipping_status', label: "Expédiée ?" }
+          - { property: 'orderDetails', label: 'Produits', type: 'easyadmin_autocomplete', type_options: { disabled: true, class: 'App\Entity\OrderDetail' } }
+
+    OrdersNotShipped:
+      label: Non expédiées
+      class: App\Entity\Order
+      disabled_actions: ['new']
+      list:
+        actions: ['show', '-edit']
+        dql_filter: 'entity.shipping_status = 0'
+        fields: *orderListFields
+      form:
+        fields: *orderFormFields
+      show:
+        fields: *orderShowFields
+
+    OrdersShipped:
+      label: Expédiées
+      class: App\Entity\Order
+      disabled_actions: ['new', 'edit']
+      list:
+        actions: ['show']
+        dql_filter: 'entity.shipping_status = 1'
+        fields: *orderListFields
+      show:
+        fields: *orderShowFields
+
+    Orders_Details:
+      label: Détails commandes
+      class: App\Entity\OrderDetail
+      disabled_actions: ['new', 'edit']
+      list:
+        actions: ['show']
+        fields: &OrdersDetailsFields
+          - { property: 'id', label: 'ID' }
+          - { property: 'id_product', label: 'Produit' }
+          - { property: 'quantity', label: 'Quantité' }
+          - { property: 'id_order', label: 'Commande n°' }
+      show:
+        fields: *OrdersDetailsFields
