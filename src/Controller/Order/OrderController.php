@@ -7,6 +7,7 @@ use App\Service\Basket\BasketService;
 use App\Service\Order\OrderService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -30,5 +31,24 @@ class OrderController extends AbstractController
 
         $orderService->createOrder($this->getUser());
         return $this->redirectToRoute("homepage", array('confirmOrder' => true), 307);
+    }
+
+    /**
+     * @Route("/shipped", name="shipped_order")
+     * @param Request $request
+     * @param OrderService $orderService
+     * @param \Swift_Mailer $mailer
+     * @return RedirectResponse
+     */
+    public function orderShipped(Request $request, OrderService $orderService, \Swift_Mailer $mailer) {
+        $id = $request->query->get('id');
+
+        $orderService->shippedOrder($id, $mailer);
+
+        return $this->redirectToRoute('easyadmin', [
+            'action' => 'show',
+            'id' => $id,
+            'entity' => $request->query->get('entity')
+        ]);
     }
 }
