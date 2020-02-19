@@ -67,6 +67,11 @@ class User implements UserInterface
      */
     private $last_name;
 
+    /**
+     * @ORM\Column(type="decimal", precision=10, scale=2)
+     */
+    private $totalAmount;
+
     public function __toString()
     {
         return $this->getUsername();
@@ -240,5 +245,20 @@ class User implements UserInterface
         $this->last_name = $last_name;
 
         return $this;
+    }
+
+    public function getTotalAmount()
+    {
+        return $this->totalAmount;
+    }
+
+    public function addTotalAmount($totalAmount)
+    {
+        $this->totalAmount += $totalAmount;
+    }
+
+    public function reduceTotalAmount($totalAmount)
+    {
+        $this->totalAmount -= $totalAmount;
     }
 }
