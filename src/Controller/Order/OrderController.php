@@ -37,12 +37,13 @@ class OrderController extends AbstractController
      * @Route("/shipped", name="shipped_order")
      * @param Request $request
      * @param OrderService $orderService
+     * @param \Swift_Mailer $mailer
      * @return RedirectResponse
      */
-    public function orderShipped(Request $request, OrderService $orderService) {
+    public function orderShipped(Request $request, OrderService $orderService, \Swift_Mailer $mailer) {
         $id = $request->query->get('id');
 
-        $orderService->shippedOrder($id);
+        $orderService->shippedOrder($id, $mailer);
 
         return $this->redirectToRoute('easyadmin', [
             'action' => 'show',
