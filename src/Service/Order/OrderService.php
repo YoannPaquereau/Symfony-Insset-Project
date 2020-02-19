@@ -53,4 +53,12 @@ class OrderService
         $this->basketService->empty();
         $this->basketService->setConfirmOrder();
     }
+
+    public function  shippedOrder($id) {
+        $repository = $this->em->getRepository(Order::class);
+
+        $entity = $repository->find($id);
+        $entity->setShippingStatus(true);
+        $this->em->flush();
+    }
 }

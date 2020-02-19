@@ -32,9 +32,10 @@ easy_admin:
     OrdersNotShipped:
       label: Non expédiées
       class: App\Entity\Order
-      disabled_actions: ['new']
+      disabled_actions: ['new', 'edit']
       list:
-        actions: ['show', '-edit']
+        actions:
+          - { name: 'shipped_order', type: 'route', label: 'Expédiée' }
         dql_filter: 'entity.shipping_status = 0'
         fields: *orderListFields
       form:
