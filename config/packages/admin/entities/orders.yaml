@@ -36,10 +36,9 @@ easy_admin:
       list:
         actions:
           - { name: 'shipped_order', type: 'route', label: 'Expédiée' }
+          - show
         dql_filter: 'entity.shipping_status = 0'
         fields: *orderListFields
-      form:
-        fields: *orderFormFields
       show:
         fields: *orderShowFields
 
