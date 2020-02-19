@@ -72,6 +72,11 @@ class User implements UserInterface
      */
     private $totalAmount;
 
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $last_order;
+
     public function __toString()
     {
         return $this->getUsername();
@@ -260,5 +265,17 @@ class User implements UserInterface
     public function reduceTotalAmount($totalAmount)
     {
         $this->totalAmount -= $totalAmount;
+    }
+
+    public function getLastOrder(): ?\DateTimeInterface
+    {
+        return $this->last_order;
+    }
+
+    public function setLastOrder(?\DateTimeInterface $last_order): self
+    {
+        $this->last_order = $last_order;
+
+        return $this;
     }
 }

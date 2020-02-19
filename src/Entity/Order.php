@@ -145,8 +145,10 @@ class Order
     /**
      * @ORM\PostPersist
      */
-    public function addTotalAmount() {
-        $this->getIdUser()->addTotalAmount($this->getPrice());
+    public function editUser() {
+        $user = $this->getIdUser();
+        $user->addTotalAmount($this->getPrice());
+        $user->setLastOrder($this->getDate());
     }
 
     /**

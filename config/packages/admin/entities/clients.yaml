@@ -15,5 +15,6 @@ easy_admin:
           - { property: 'last_name', label: 'Nom' }
           - { property: 'first_name', label: 'Prénom' }
           - { property: 'totalAmount', label: 'Total €' }
+          - { property: 'last_order', label: 'Dernière commande' }
       show:
         fields: *clientFields
