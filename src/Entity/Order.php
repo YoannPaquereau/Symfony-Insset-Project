@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Table(name="orders")
  * @ORM\Entity(repositoryClass="App\Repository\OrderRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Order
 {
@@ -139,5 +140,21 @@ class Order
         }
 
         return $this;
+    }
+
+    /**
+     * @ORM\PostPersist
+     */
+    public function editUser() {
+        $user = $this->getIdUser();
+        $user->addTotalAmount($this->getPrice());
+        $user->setLastOrder($this->getDate());
+    }
+
+    /**
+     * @ORM\PreRemove
+     */
+    public function reduceTotalAmount() {
+        $this->getIdUser()->reduceTotalAmount($this->getPrice());
     }
 }

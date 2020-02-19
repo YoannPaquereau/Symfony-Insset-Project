@@ -14,5 +14,7 @@ easy_admin:
           - { property: 'register_day', label: "Date d'inscription" }
           - { property: 'last_name', label: 'Nom' }
           - { property: 'first_name', label: 'Prénom' }
+          - { property: 'totalAmount', label: 'Total €' }
+          - { property: 'last_order', label: 'Dernière commande' }
       show:
         fields: *clientFields

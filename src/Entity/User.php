@@ -67,6 +67,16 @@ class User implements UserInterface
      */
     private $last_name;
 
+    /**
+     * @ORM\Column(type="decimal", precision=10, scale=2)
+     */
+    private $totalAmount;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $last_order;
+
     public function __toString()
     {
         return $this->getUsername();
@@ -238,6 +248,33 @@ class User implements UserInterface
     public function setLastName(string $last_name): self
     {
         $this->last_name = $last_name;
+
+        return $this;
+    }
+
+    public function getTotalAmount()
+    {
+        return $this->totalAmount;
+    }
+
+    public function addTotalAmount($totalAmount)
+    {
+        $this->totalAmount += $totalAmount;
+    }
+
+    public function reduceTotalAmount($totalAmount)
+    {
+        $this->totalAmount -= $totalAmount;
+    }
+
+    public function getLastOrder(): ?\DateTimeInterface
+    {
+        return $this->last_order;
+    }
+
+    public function setLastOrder(?\DateTimeInterface $last_order): self
+    {
+        $this->last_order = $last_order;
 
         return $this;
     }
