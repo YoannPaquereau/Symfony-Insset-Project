@@ -45,10 +45,6 @@ class OrderService
             $orderDetail->setIdOrder($order);
 
             $this->em->persist($orderDetail);
-
-            $product = $this->em->getRepository(Product::class)->find($item['product']->getId());
-            $product->setStock($product->getStock() - $item['quantity']);
-            $this->em->flush();
         }
 
         $this->em->flush();

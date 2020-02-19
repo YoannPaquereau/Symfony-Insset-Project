@@ -146,4 +146,8 @@ class Product
         $this->imagePath = $image;
     }
 
+    public function changeStock($quantity) {
+        $this->stock -= $quantity;
+    }
+
 }
