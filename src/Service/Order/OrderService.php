@@ -82,4 +82,8 @@ class OrderService
 
         $mailer->send($message);
     }
+
+    public function getOrder($id) {
+        return $this->em->getRepository(Order::class)->find($id);
+    }
 }

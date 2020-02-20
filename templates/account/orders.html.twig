@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <style>
+        .table-row{
+            cursor:pointer;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <table class="table mx-auto text-center">
+            <thead>
+                <th>Date</th>
+                <th>Montant</th>
+                <th>Status</th>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                    <tr class="table-row" data-href="{{ path('account_orders') }}/{{ order.id }}">
+                        <td>{{ order.date|date("d/m/Y") }}</td>
+                        <td>{{ order.price }} €</td>
+                        <td>{% if order.shippingStatus == true %}Expédiée{% else %}En cours de traitement{% endif %}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function($) {
+            $(".table-row").click(function() {
+                window.document.location = $(this).data("href");
+            });
+        });
+    </script>
+{% endblock %}
