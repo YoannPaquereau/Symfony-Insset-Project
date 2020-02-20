@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Table(name="orders_detail")
  * @ORM\Entity(repositoryClass="App\Repository\OrderDetailRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class OrderDetail
 {
@@ -78,5 +79,13 @@ class OrderDetail
         $this->id_order = $id_order;
 
         return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function changeStock() {
+        $product = $this->getIdProduct();
+        $product->changeStock($this->getQuantity());
     }
 }

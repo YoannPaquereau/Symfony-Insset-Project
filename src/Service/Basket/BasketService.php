@@ -101,4 +101,42 @@ class BasketService
         }
         return false;
     }
+
+    public function setErrorOrder() {
+        $this->session->set('errorOrder', true);
+    }
+
+    public function getErrorOrder() {
+        if ($this->session->has('errorOrder')) {
+            $this->session->remove('errorOrder');
+            return true;
+        }
+        return false;
+    }
+
+    public function updateStock() {
+        $basket = $this->session->get("basket", []);
+
+        foreach ($basket as $id => &$quantity) {
+            $realStock = $this->productRepository->find($id)->getStock();
+            if ($realStock < $quantity) {
+                if ($realStock <= 0) {
+                    unset($basket[$id]);
+                }
+                else {
+                    $quantity = $realStock;
+                }
+                $this->session->set('modifyStock', true);
+            }
+        }
+        $this->session->set('basket', $basket);
+    }
+
+    public function getupdateStock() {
+        if ($this->session->has('modifyStock')) {
+            $this->session->remove('modifyStock');
+            return true;
+        }
+        return false;
+    }
 }

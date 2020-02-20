@@ -32,28 +32,28 @@ class OrderService
         $order->setPrice($this->basketService->getTotal());
 
         $this->em->persist($order);
-        $this->em->flush();
 
-        $this->createOrderDetail($order);
+        return $this->createOrderDetail($order);
     }
 
     public function createOrderDetail($order) {
         foreach($this->basketService->getBasket() as $item) {
+            if ($this->em->getRepository(Product::class)->find($item['product'])->getStock() < $item['quantity']) {
+                $this->basketService->setErrorOrder();
+                return false;
+            }
             $orderDetail = new OrderDetail();
             $orderDetail->setIdProduct($item['product']);
             $orderDetail->setQuantity($item['quantity']);
             $orderDetail->setIdOrder($order);
 
             $this->em->persist($orderDetail);
-
-            $product = $this->em->getRepository(Product::class)->find($item['product']->getId());
-            $product->setStock($product->getStock() - $item['quantity']);
-            $this->em->flush();
         }
 
         $this->em->flush();
         $this->basketService->empty();
         $this->basketService->setConfirmOrder();
+        return true;
     }
 
     public function shippedOrder($id, \Swift_Mailer $mailer) {

@@ -29,8 +29,12 @@ class OrderController extends AbstractController
             return $this->redirectToRoute('basket_index');
         }
 
-        $orderService->createOrder($this->getUser());
-        return $this->redirectToRoute("homepage", array('confirmOrder' => true), 307);
+        $error = null;
+        if (!$orderService->createOrder($this->getUser())) {
+            return $this->redirectToRoute("basket_index", ['error' => true]);
+        }
+
+        return $this->redirectToRoute("homepage", []);
     }
 
     /**

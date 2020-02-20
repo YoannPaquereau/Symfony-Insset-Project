@@ -2,6 +2,17 @@
 {% block title %}Mon panier{% endblock %}
 
 {% block body %}
+    {% if error|default %}
+        <div class="alert alert-danger" role="alert">
+            Une erreur est survenue lors de la création de votre commande. Veuillez réessayer ultérieurement.
+        </div>
+    {% endif %}
+
+    {% if updateStock|default %}
+        <div class="alert alert-warning" role="alert">
+            Le stock d'un de vos articles a changé.
+        </div>
+    {% endif %}
     <a href="{{ last_page }}" class="btn btn-outline-primary " role="button" aria-pressed="true">Revenir en arrière</a>
     {% if products | length > 0 %}
         <table class="table">
