@@ -115,7 +115,7 @@ class BasketService
     }
 
     public function updateStock() {
-        $basket = $this->session->get("basket");
+        $basket = $this->session->get("basket", []);
 
         foreach ($basket as $id => &$quantity) {
             $realStock = $this->productRepository->find($id)->getStock();
