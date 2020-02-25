@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <table class="table mx-auto text-center">
+            <thead>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Date</th>
+                    <td>{{ order.date|date("d/m/Y") }}</td>
+                </tr>
+                <tr>
+                    <th>Montant total</th>
+                    <td>{{ order.price }} €</td>
+                </tr>
+                <tr>
+                    <th>Status</th>
+                    <td>{% if order.shippingStatus == true %}Expédiée{% else %}En cours de traitement{% endif %}</td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table mx-auto text-center">
+            <thead>
+                <th>Article(s)</th>
+                <th>Image</th>
+                <th>Prix unitaire</th>
+                <th>Quantité</th>
+                <th>Prix total</th>
+            </thead>
+            <tbody>
+                {% for details in order.orderDetails %}
+                    <tr>
+                        <td>{{ details.IdProduct.name }}</td>
+                        <td><img src="{{ url }}/{{ details.IdProduct.imagePath }}" </td>
+                        <td>{{ details.IdProduct.price }} €</td>
+                        <td>{{ details.quantity }}</td>
+                        <td>{{ details.quantity * details.IdProduct.price }} €</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

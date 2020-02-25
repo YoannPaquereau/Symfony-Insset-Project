@@ -4,7 +4,6 @@
 namespace App\Controller;
 
 
-use App\Entity\Product;
 use App\Service\Basket\BasketService;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
