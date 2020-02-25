@@ -20,25 +20,29 @@
                 </tr>
             </tbody>
         </table>
-        <table class="table mx-auto text-center">
-            <thead>
-                <th>Article(s)</th>
-                <th>Image</th>
-                <th>Prix unitaire</th>
-                <th>Quantité</th>
-                <th>Prix total</th>
-            </thead>
-            <tbody>
-                {% for details in order.orderDetails %}
+        <div class="table-responsive">
+            <table class="table mx-auto text-center">
+                <thead>
                     <tr>
-                        <td>{{ details.IdProduct.name }}</td>
-                        <td><img src="{{ url }}/{{ details.IdProduct.imagePath }}" </td>
-                        <td>{{ details.IdProduct.price }} €</td>
-                        <td>{{ details.quantity }}</td>
-                        <td>{{ details.quantity * details.IdProduct.price }} €</td>
+                        <th>Article(s)</th>
+                        <th>Image</th>
+                        <th>Prix unitaire</th>
+                        <th>Quantité</th>
+                        <th>Prix total</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for details in order.orderDetails %}
+                        <tr>
+                            <td>{{ details.IdProduct.name }}</td>
+                            <td><img src="{{ url }}/{{ details.IdProduct.imagePath }}" alt=""></td>
+                            <td>{{ details.IdProduct.price }} €</td>
+                            <td>{{ details.quantity }}</td>
+                            <td>{{ details.quantity * details.IdProduct.price }} €</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 {% endblock %}

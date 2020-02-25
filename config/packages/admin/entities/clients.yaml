@@ -6,6 +6,7 @@ easy_admin:
       disabled_actions: ['new', 'edit']
       list:
         actions: ['show']
+        dql_filter: "entity.username <> 'admin'"
         fields: &clientFields
           - { property: 'id', label: 'ID' }
           - { property: 'username', label: 'Nom' }
