@@ -86,6 +86,7 @@ class User implements UserInterface
     {
         $this->register_day = new \DateTime();
         $this->orders = new ArrayCollection();
+        $this->totalAmount = 0;
     }
 
     public function getId(): ?int
