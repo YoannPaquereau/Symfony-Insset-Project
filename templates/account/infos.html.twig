@@ -29,10 +29,12 @@
                         <th scope="row">Montant total des commandes</th>
                         <td>{{ app.user.totalAmount }} €</td>
                     </tr>
-                    <tr>
-                        <th scope="row">Dernière commande</th>
-                        <td>{{ app.user.lastOrder|date("d/m/Y") }}</td>
-                    </tr>
+                    {% if app.user.lastOrder is not null %}
+                        <tr>
+                            <th scope="row">Dernière commande</th>
+                            <td>{{ app.user.lastOrder|date("d/m/Y") }}</td>
+                        </tr>
+                    {% endif %}
                     <tr>
                         <th scope="row">Date d'inscription</th>
                         <td>{{ app.user.registerDay|date("d/m/Y") }}</td>

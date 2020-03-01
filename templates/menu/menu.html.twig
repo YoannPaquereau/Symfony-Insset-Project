@@ -6,8 +6,6 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{{ path('account_infos') }}">Infos personnelles</a>
             <a class="dropdown-item" href="{{ path('account_orders') }}">Mes commandes</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
         </div>
     </li>
     {% if is_granted('ROLE_ADMIN') %}
