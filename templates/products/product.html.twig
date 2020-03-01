@@ -19,13 +19,14 @@
 
 <div class="row">
     {% for product in products %}
-        <div class="col-md-3 mb-3">
+        <div class="col-md-4 mb-3">
             <div class="card mb-3 h-100">
-                <img class="card-img-top img-fluid" src="{{ url }}/{{ product.imagePath }}" alt="Card image cap">
+                <img class="card-img-top img-fluid mx-auto d-block" src="{{ url }}/{{ product.imagePath }}" alt="Card image cap">
                 <div class="card-body d-flex flex-column">
-                    <h5 class="card-title text-center font-weight-bold">{{ product.name}}</h5>
-                    <p class="card-text">{{ product.description }}</p>
+
                     <div class="mt-auto">
+                        <h5 class="card-title text-center font-weight-bold">{{ product.name}}</h5>
+                        <p class="card-text text-center">{{ product.description }}</p>
                         <div class="text-primary text-center h2 font-weight-bold">{{ product.price }} €</div>
                         {% if product.stock > 0 %}
                             <a href="{{ path('addBasket', {'id': product.id}) }}" class="btn btn-outline-success w-100 text-truncate" role="button">
