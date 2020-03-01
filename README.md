@@ -8,10 +8,11 @@ Use this [DockerFile](https://github.com/YoannPaquereau/L3-Framework-2019) to cr
 
 ## Usage
 
+Change all .env variables who need changes
 ```
 composer install
 bin/console doctrine:database:create # Optional if your database already exist
-bin/console doctrine:make:migration
+bin/console doctrine:migrations:migrate # If nothing happen, all good
 symfony server:start
 ```
 A SQL file contains database data (just in case)
