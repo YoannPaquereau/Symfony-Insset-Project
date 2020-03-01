@@ -143,7 +143,7 @@ class Order
     }
 
     /**
-     * @ORM\PostPersist
+     * @ORM\PrePersist
      */
     public function editUser() {
         $user = $this->getIdUser();
