@@ -1,6 +1,14 @@
 {% extends 'base.html.twig' %}
 {% block title %}Mon panier{% endblock %}
 
+{% block stylesheets %}
+    <style>
+        select option:nth-child(2)[selected] {
+            color: red;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
     {% if error|default %}
         <div class="alert alert-danger" role="alert">
@@ -14,6 +22,7 @@
         </div>
     {% endif %}
     <a href="{{ last_page }}" class="btn btn-outline-primary " role="button" aria-pressed="true">Revenir en arrière</a>
+    <h2 class="test"></h2>
     {% if products | length > 0 %}
         <table class="table">
             <thead>
@@ -31,22 +40,21 @@
                     <tr>
                         <td>{{ item.product.name }}</td>
                         <td><img class="card-img-top img-fluid" src="{{ url }}/{{ item.product.imagePath }}" style="width:50px;height:50px;" alt=""></td>
-                        <td>{{ item.product.price }}€</td>
+                        <td id="price">{{ item.product.price }}€</td>
                         <td>
-                            <form action="{{ path('edit_quantity', {'id': item.product.id }) }}" method="post">
-                                <select name="quantity">
-                                    {% for i in 1..item.product.stock %}
-                                        {% if i == item.quantity %}
-                                            <option value="" disabled selected>{{ item.quantity }}</option>
-                                        {% else %}
-                                            <option value="{{ i }}">{{ i }}</option>
-                                        {% endif %}
-                                    {% endfor %}
-                                </select>
-                                <button><i class="far fa-edit"></i></button>
-                            </form>
+                            <select name="quantity" id="quantity">
+                                {% set max = (item.product.stock > 10) ? 9 : item.product.stock  %}
+                                {% for i in 1..max %}
+                                    {% if i == item.quantity %}
+                                        <option value="{{ item.quantity }}" disabled selected id="active_option">{{ item.quantity }}</option>
+                                    {% else %}
+                                        <option value="{{ i }}">{{ i }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                            <input type="hidden" value="{{ item.product.id }}" />
                         </td>
-                        <td>{{ item.product.price * item.quantity }}€</td>
+                        <td id="price_x_quantity">{{ item.product.price * item.quantity }}€</td>
                         <td>
                             <a href="{{ path('removeBasket', {'id': item.product.id }) }}" class="btn btn-danger btn-sm">
                             <i class="fas fa-trash"></i>
@@ -59,7 +67,7 @@
             <tr>
                 <td></td>
                 <td colspan="3" class="text-right">Total :</td>
-                <td>{{ total }}€</td>
+                <td id="total">{{ total }}€</td>
                 <td></td></tr>
             </tfoot>
         </table>
@@ -71,4 +79,52 @@
     {% else %}
         <h3>Panier vide</h3>
     {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        console.log('It\s working!');
+        $(function () {
+            $('.test').append('Hello');
+            $('#quantity').on('change', function(e) {
+                let select = $(this);
+                let idProduct = $(this).parents().find('input').val();
+
+                $.ajax({
+                    url: '{{ path('change_quantity1') }}',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        'quantity': select.val(),
+                        'idProduct': idProduct
+                    },
+                    async: true,
+                    success: function(data) {
+
+                        let oldOption = select.find('#active_option');
+                        oldOption.removeAttr('id selected disabled');
+
+
+                        let newOption = select.find('option[value=\'' + data.quantity + '\']');
+                        newOption.attr({
+                            disabled: 'disabled',
+                            id: 'active_option',
+                            selected: true
+                        });
+
+                        let parent = select.parents().parents();
+                        let uniquePrice = parseFloat(parent.find('#price').html());
+
+                        let total = parseFloat(parent.find('#total').html());
+
+                        let oldTotalProduct = parseFloat(parent.find('#price_x_quantity').html());
+                        let newTotalProduct = uniquePrice * data.quantity;
+
+                        parent.find('#price_x_quantity').html(newTotalProduct + '€');
+                        parent.find('#total').html(total - oldTotalProduct + newTotalProduct + '€');
+                    }
+                })
+            })
+        });
+    </script>
 {% endblock %}

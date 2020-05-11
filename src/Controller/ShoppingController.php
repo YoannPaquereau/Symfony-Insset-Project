@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Service\Basket\BasketService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -71,5 +72,22 @@ class ShoppingController extends AbstractController
         $basketService->editQuantity($id, $quantity);
 
         return $this->redirectToRoute("basket_index");
+    }
+
+    /**
+     * @Route("/change_quantity1", name="change_quantity1")
+     * @param Request $request
+     * @param BasketService $basketService
+     * @return JsonResponse
+     */
+    public function change_quantity1(Request $request, BasketService $basketService) {
+        $quantity = $request->request->get('quantity');
+        $idProduct = $request->request->get('idProduct');
+
+        $basketService->editQuantity($idProduct, $quantity);
+
+        $data = ['quantity' => $quantity, 'idProduct' => $idProduct];
+
+        return $this->json($data);
     }
 }

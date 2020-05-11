@@ -49,7 +49,6 @@ class BasketService
     public function getTotal(): float {
 
         $total = 0;
-
         foreach ($this->getBasket() as $item) {
             $total += $item['product']->getPrice() * $item['quantity'];
         }
